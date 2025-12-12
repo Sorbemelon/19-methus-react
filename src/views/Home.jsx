@@ -9,7 +9,7 @@ export default function Home() {
 
     return (
         <div>
-            <div className="pb-80 py-10 gap-y-4 flex flex-col justify-center items-center min-h-screen bg-gray-800 text-white">
+            <div className="pt-10 gap-y-4 flex flex-col justify-center items-center bg-gray-800 text-white">
                 <h1 className="">Generation Thailand</h1>
                 {view === "" && <h1>React Assessment</h1>}
                 {view === "user" && <h1>Home - User Section</h1>}

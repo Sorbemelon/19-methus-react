@@ -29,9 +29,10 @@ const router = createBrowserRouter([
 
 export default function App() {
   const [view, setView] = useState("");
+  const [upload, setUpload] = useState(true);
 
   return (
-    <MessageContext.Provider value={{ view, setView }}>
+    <MessageContext.Provider value={{ view, setView, upload, setUpload }}>
       <RouterProvider router={router} />
     </MessageContext.Provider>
   );
