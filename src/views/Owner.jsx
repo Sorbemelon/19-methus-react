@@ -5,7 +5,7 @@ export default function Home() {
                 19 Methus (Kanoon) - JSD11
             </h1>
             <div>
-                <img src="src/assets/cat_la_02.jpg" className="w-70 h-70 rounded-full" />
+                <img src="assets/cat_la_02.jpg" className="w-70 h-70 rounded-full" />
             </div>
             <h2 className="pt-8 pb-4">
                 Short Biography:
