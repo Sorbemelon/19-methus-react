@@ -35,7 +35,7 @@ const handleDelete = async (id) => {
 
   return (
     <div className="">
-        {loading && <div className="text-4xl font-bold animate-bounce text-white">Loading...</div>}
+        {loading && <div className="text-4xl font-bold animate-bounce text-white text-center">Loading...</div>}
         {!loading && <table className="w-fit overflow-hidden rounded-xl mx-auto mb-10 bg-white">
             <thead className="text-left font-medium text-white text-lg bg-linear-to-br from-black to-gray-600">
                 <tr>
