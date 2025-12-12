@@ -69,7 +69,7 @@ const Form = () => {
       <button type="submit" className="font-bold bg-green-400 rounded-4xl w-24" disabled={loading}>
         {loading ? "Submitting..." : "Submit"}
       </button>
-      <button type="button" className="bg-blue-500 text-white w-full mt-4 py-2 rounded" onClick={handleEditClick}>
+      <button type="button" className="bg-blue-500 text-white w-14 mt-4 py-2 rounded" onClick={handleEditClick}>
         Edit
       </button>
     </form>
