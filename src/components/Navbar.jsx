@@ -13,7 +13,8 @@ export default function Navbar() {
                         to="/"
                         onClick={() => {
                         setView("");
-                    }}>
+                    }}
+                    >
                         Home
                     </Link>
                 </li>

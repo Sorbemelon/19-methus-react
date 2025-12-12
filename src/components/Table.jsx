@@ -39,9 +39,10 @@ const handleDelete = async (id) => {
         {!loading && <table className="w-fit overflow-hidden rounded-xl mx-auto mb-10 bg-white">
             <thead className="text-left font-medium text-white text-lg bg-linear-to-br from-black to-gray-600">
                 <tr>
+                    { admin && 
                     <th className="px-6 py-3">
                         ID
-                    </th>
+                    </th> }
                     <th className="px-6 py-3">
                         Name
                     </th>
@@ -61,7 +62,10 @@ const handleDelete = async (id) => {
                 {data.length > 0 ? (
                     data.map((employee) => (
                         <tr className="hover:bg-gray-50">
-                            <td className="px-6 py-1">{employee.id}</td>
+                            { admin && 
+                                <td className="px-6 py-1 text-center">
+                                {employee.id}
+                            </td>}
                             <td className="px-6 py-1">{employee.name}</td>
                             <td className="px-6 py-1">{employee.lastname}</td> 
                             <td className="px-6 py-1">{employee.position}</td>

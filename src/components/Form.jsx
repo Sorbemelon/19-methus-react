@@ -1,61 +1,80 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import Pokemon from "../components/poke-card";
-import StudenPost from "../components/post";
-import Formxdd from "../components/form2";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { MessageContext } from "../context/MessageContext";
 
-export default function Table() {
-  const pokeonURL = "https://pokeapi.co/api/v2/pokemon/minun";
-  const backendURL = "https://memory-backend-forjsd11.onrender.com/api/users";
+const Form = () => {
+  const {upload, setUpload} = useContext(MessageContext)
+  const [formData, setFormData] = useState({
+    name: "",
+    lastname: "",
+    position: "",
+    id: ""
+  });
+  const [loading, setLoading] = useState(false);
 
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [viewww, setViewww] = useState(true);
-  const [url, setUrl] = useState(pokeonURL);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-  const fetchData = async () => {
-    //putsomecode to this
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
-      let response = await axios.get(url);
-      setData(response.data);
+      const response = await axios.post("https://67eca027aa794fb3222e43e2.mockapi.io/members", formData);
+      console.log(response);
+      setFormData({
+        name: "",
+        lastname: "",
+        position: "",
+        id: "",
+      });
     } catch (error) {
-      console.log(error);
+      console.error("Error creating user:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSwitch = () => {
-    setViewww(!viewww);
-
-    if (viewww) {
-      setUrl(backendURL);
-    } else {
-      setUrl(pokeonURL);
-    }
-  };
-
+    const handleEditClick = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.put(`https://67eca027aa794fb3222e43e2.mockapi.io/members/${formData.id}`, formData);
+        setFormData({
+          name: "",
+          lastname: "",
+          position: "",
+          id: "",
+        });
+      } catch (error) {
+        console.error("Error creating user:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
   useEffect(() => {
-    fetchData();
-  }, [url]);
+    setUpload(!upload);
+  }, [formData]);
 
   return (
-    <div className="flex flex-col justify-center items-center text-center gap-12">
-      <button className="font-bold rounded-4xl bg-amber-50 w-24" onClick={handleSwitch}>
-        Switch
+    <form onSubmit={handleSubmit} className="w-[80%] xl:w-fit grid grid-cols-2 xl:grid-cols-[1fr_1fr_1fr_1fr_1fr_1fr] gap-4 mb-8 mx-auto">
+      <input className="xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="name" value={formData.name} onChange={handleChange} placeholder="name" disabled={loading} required />
+      <input className="xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="lastname" value={formData.lastname} onChange={handleChange} placeholder="lastname" disabled={loading} required />
+      <input className="xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="position" value={formData.position} onChange={handleChange} placeholder="position" disabled={loading} required />
+      <input className="xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="id" value={formData.id} onChange={handleChange} placeholder="id" disabled={loading} />
+      <button type="submit" className="font-bold bg-lime-400 rounded-xl w-[50%] xl:w-full hover:bg-green-600 hover:text-white hover:cursor-pointer ml-auto" disabled={loading}>
+        {loading ? "Submitting..." : "Submit"}
       </button>
-      {viewww ? (
-        <>
-          {loading && <div className="text-4xl font-bold animate-bounce text-white">Loading...</div>}
-          {data && <Pokemon data={data} />}
-        </>
-      ) : (
-        <div className="flex flex-col w-auto gap-12">
-          <Formxdd onUserCreated={fetchData} />
-          <div className="grid grid-cols-4 gap-4">{data && Array.isArray(data) && data.map((e) => <StudenPost key={e.id} {...e} onDelete={fetchData} />)}</div>
-        </div>
-      )}
-    </div>
+      <button type="button" className="font-bold bg-sky-400 w-[50%] xl:w-full py-2 rounded-xl hover:bg-blue-600 hover:text-white hover:cursor-pointer" onClick={handleEditClick}>
+        Edit
+      </button>
+    </form>
   );
-}
+};
+
+export default Form;
