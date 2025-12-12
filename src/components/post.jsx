@@ -31,6 +31,7 @@ const Form = () => {
         name: "",
         lastname: "",
         position: "",
+        id: "",
       });
     } catch (error) {
       console.error("Error creating user:", error);
@@ -41,14 +42,14 @@ const Form = () => {
 
     const handleEditClick = async () => {
       setLoading(true);
-      setFormData({
-        name: "",
-        lastname: "",
-        position: "",
-        id: "",
-      });
       try {
         const response = await axios.put(`https://67eca027aa794fb3222e43e2.mockapi.io/members/${formData.id}`, formData);
+        setFormData({
+          name: "",
+          lastname: "",
+          position: "",
+          id: "",
+        });
       } catch (error) {
         console.error("Error creating user:", error);
       } finally {
