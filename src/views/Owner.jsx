@@ -1,7 +1,7 @@
 export default function Home() {
     return (
         <div className="flex flex-col items-center min-h-screen bg-yellow-50">
-            <h1 className="py-8">
+            <h1 className="py-8 text-center">
                 19 Methus (Kanoon) - JSD11
             </h1>
             <div>

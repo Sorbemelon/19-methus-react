@@ -13,7 +13,7 @@ export default function Home() {
                 {view === "" && <h1>React Assessment</h1>}
                 {view === "user" && <h1>Home - User View</h1>}
                 {view === "admin" && <h1>Home - Admin View</h1>}
-                <div className="flex gap-x-4 mb-8">
+                <div className="flex gap-x-4 mb-8 mx-4">
                     <ViewToggleButton>
                         <Link to="/user">
                             User Home View
