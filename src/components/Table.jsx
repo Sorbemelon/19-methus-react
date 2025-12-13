@@ -111,7 +111,7 @@ export default function Table({admin}) {
                         Position
                     </th>
                     { admin && 
-                    <th className="px-1 md:px-3 py-3">
+                    <th className="px-1 md:px-3 py-3 text-sm text-end">
                         Edit/<br className="md:hidden" />Delete
                     </th> }
                 </tr>
@@ -144,8 +144,8 @@ export default function Table({admin}) {
                             }
                             { admin && 
                                 <td className="px-1 md:px-3 py-1 text-center">
-                                    <div className="flex gap-1 md:gap-4">
-                                        { editState &&
+                                    <div className="flex gap-1 justify-end md:gap-4">
+                                        { (editState && ((employee.id === editId)) ) &&
                                         <button className=" w-6 rounded text-white hover:cursor-pointer hover:bg-amber-200" onClick={() =>handleEditClick()}>
                                             ✅
                                         </button>
