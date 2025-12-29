@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 export default function MessageProvider({ children }) {
+  const API = import.meta.env.VITE_API_URL;
   const location = useLocation();
   const [view, setView] = useState("");
   const [update, setUpdate] = useState("");
@@ -18,7 +19,7 @@ export default function MessageProvider({ children }) {
   }, [location.pathname]);
 
   return (
-    <MessageContext.Provider value={{ view, setView, update, setUpdate }}>
+    <MessageContext.Provider value={{ view, setView, update, setUpdate, API }}>
       {children}
     </MessageContext.Provider>
   );

@@ -10,9 +10,14 @@ export default function Home() {
             <h2 className="pt-8 pb-4">
                 Short Biography:
             </h2>
-            <p className="w-[60%]">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil quaerat, vero odio obcaecati aliquid corporis asperiores reiciendis sed quidem qui alias illo, voluptatibus doloremque repellat cum. Fugiat quisquam possimus architecto?
-            </p>
+            <h3 className="w-[60%] text-center text-2xl font-semibold">
+                Cat Engineer
+            </h3>
+            <ul className="list-disc">
+                <li>Fast Cat</li>
+                <li>Analytic Moewing</li>
+                <li>Systematic Sleeper</li>
+            </ul>
         </div>
     )
 }

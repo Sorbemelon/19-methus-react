@@ -1,18 +1,17 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { useContext } from "react";
 import { MessageContext } from "../context/MessageContext";
+import axios from "axios";
 import Table from "./Table.jsx";
 
 const Form = () => {
-  const {update, setUpdate} = useContext(MessageContext)
-  const [admin, setAdmin] = useState("admin");
+  const {update, setUpdate, API} = useContext(MessageContext)
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    lastname: "",
-    position: "",
-    id: ""
+    username: "",
+    email: "",
+    role: "",
+    password: ""
   });
 
   const handleChange = (e) => {
@@ -27,12 +26,12 @@ const Form = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const response = await axios.post("https://67eca027aa794fb3222e43e2.mockapi.io/members", formData);
+      await axios.post(`${API}`, formData);
       setFormData({
-        name: "",
-        lastname: "",
-        position: "",
-        id: "",
+        username: "",
+        email: "",
+        role: "",
+        password: ""
       });
       setUpdate(!update)
     } catch (error) {
@@ -44,20 +43,21 @@ const Form = () => {
 
   return (
     <div>
-      <di className="flex flex-col w-[80%] md:w-fit px-4 mx-auto">
+      <div className="flex flex-col w-[80%] md:w-fit px-4 mx-auto">
         <h2 className="text-gray-200 mb-2">Create User</h2>
         <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 mb-8">
-          <input className="col-span-3 xl:col-span-1 xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="name" value={formData.name} onChange={handleChange} placeholder="name" disabled={submitting} required />
-          <input className="col-span-3 xl:col-span-1 xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="lastname" value={formData.lastname} onChange={handleChange} placeholder="lastname" disabled={submitting} required />
-          <input className="col-span-3 xl:col-span-1 xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="position" value={formData.position} onChange={handleChange} placeholder="position" disabled={submitting} required />
+          <input className="col-span-3 xl:col-span-1 xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="username" value={formData.username} onChange={handleChange} placeholder="username" disabled={submitting} required />
+          <input className="col-span-3 xl:col-span-1 xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="email" value={formData.email} onChange={handleChange} placeholder="email" disabled={submitting} required />
+          <input className="col-span-3 xl:col-span-1 xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="role" value={formData.role} onChange={handleChange} placeholder="role" disabled={submitting} required />
+          <input className="col-span-3 xl:col-span-1 xl:w-40 bg-amber-50 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" name="password" value={formData.password} onChange={handleChange} placeholder="password (>8)" disabled={submitting} required />
 
           <button type="submit" className="px-6 py-2 ml-auto font-bold bg-lime-400 rounded-xl hover:bg-green-600 hover:text-white hover:cursor-pointer" disabled={submitting}>
             {submitting ? "Submitting..." : "Submit"}
           </button>
         </form>
-      </di>
+      </div>
       
-      <Table admin={admin} />
+      <Table admin={true} />
     </div>
   );
 };
